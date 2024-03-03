@@ -1,0 +1,10 @@
+{
+    "hello": {
+        "description": "Prints hello!",
+        "usage": "hello"
+    },
+    "add": {
+        "description": "Adds the two provided arguments",
+        "usage": "add <int> <int>"
+    }
+}
