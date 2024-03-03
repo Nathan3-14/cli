@@ -29,20 +29,26 @@ class Main:
 
     def main(self):
         self.parse_flags()
-        self.check_help()
 
         self.run_command()
 
 
 
     def run_command(self):
-        if not self.args[0].startswith("-"):
-            command_to_run = lambda x: x
-            if self.args[0] in list(self.commands.keys()):
-                command_to_run = self.commands[self.args[0]]
+        flags = []
+        for arg in self.args.copy():
+            if arg.startswith("-"):
+                flags.append(arg)
+                self.args.remove(arg)
             else:
-                self.error([f"No command named '{self.args[0]}'"])
-            command_to_run(self.args[1:])
+                if arg in list(self.commands.keys()):
+                    command_to_run = self.commands[arg]
+                    break
+                else:
+                    self.error([f"No command named '{arg}'"])
+        
+        print(f"Running '{self.args[0]}' with {self.args[1:]}")
+        command_to_run(self.args[1:], flags)
 
 
     def error(self, message: List[str], error_prefix: str="ERR", error_log_path: str="./error.log") -> None:
@@ -68,18 +74,10 @@ class Main:
 
     def parse_flags(self):
         for arg in self.args:
-            if re.match(self.single_flag_regex, arg) or re.match(self.word_flag_regex, arg): #? Checks if argument given is a flag
-                if arg.startswith("--"):
-                    self.set_flag(self.flags, f"--{arg[2:]}")
-                else: #? Can only be -- or -
-                    for char in arg[1:]:
-                        self.set_flag(self.flags, f"-{char}")
+            if re.match(self.word_flag_regex, arg): #? Checks if argument given is a flag
+                self.set_flag(self.flags, f"--{arg[2:]}")
     
 
-    def check_help(self):
-        if self.flags["--help"]:
-            self.display_help()
-    
     
     def display_help(self):
         for command, command_info in self.help.items():
@@ -87,17 +85,22 @@ class Main:
             print(f"  Description: {command_info['description']}")
             print(f"  Usage: {command_info['usage']}")
 
+def check_flag(flag: str, flags: List[str]):
+    return flag in flags
+
 
 
 if __name__ == "__main__":
-    def hello(args: List[Any]):
+    def hello(args: List[Any], flags: List[str]):
         for name in args:
-            print(f"Hello {name}!")
+            print(f"Hello {name}!", end=" " if check_flag("-o", flags) else "\n")
+        
+        if check_flag("-o", flags):
+            print("")
+    
 
-    test = Main({
-        "-a": False,
-        "-b": False
-    }, {
+    
+    test = Main({}, {
         "hello": hello
     })
     test.main() #! ENABLED FOR TESTING
