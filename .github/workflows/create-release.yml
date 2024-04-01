@@ -17,7 +17,6 @@ jobs:
     
     - name: Compress Code
       run: |
-        apt install zip
         zip -r ./src.zip ./custom/src
 
   create_release:
