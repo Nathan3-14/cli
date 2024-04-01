@@ -5,6 +5,8 @@ on:
     paths:
       - custom/src/**
       - custom/src/*
+permissions: write-all
+
 jobs:
   create_release:
     runs-on: ubuntu-latest
