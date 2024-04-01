@@ -8,12 +8,22 @@ on:
 permissions: write-all
 
 jobs:
+  compress_src:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+    
+    - name: Compress Code
+      run: |
+        apt install zip
+        zip -r ./src.zip ./custom/src
+
   create_release:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
     
     - name: Create Release
       id: create_release
@@ -28,14 +38,14 @@ jobs:
           - a
           - b
       
-    # - name: Upload Asset
-    #   uses: actions/upload-release-asset@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{ steps.create_release.outputs.upload_url }}
-    #   with:
-    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-    #     asset_path: ./custom/src.zip
-    #     asset_name: src.zip
-    #     asset_content_type: application/zip
+    - name: Upload Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ steps.create_release.outputs.upload_url }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./custom/src.zip
+        asset_name: src.zip
+        asset_content_type: application/zip
 
 
