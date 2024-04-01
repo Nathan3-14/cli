@@ -4,6 +4,7 @@ from rich.console import Console
 from rich import print as rprint
 from rich import print_json as rprint_json
 import json
+from funcs import error
 from test_funcs import add
 
 print_json = lambda a: rprint_json(json.dumps(a))
