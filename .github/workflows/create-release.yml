@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - custom/src/**
+      - custom/src/*
 jobs:
   create_release:
     runs-on: ubuntu-latest

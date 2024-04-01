@@ -1,0 +1,8 @@
+{
+    "hello": {
+        "description": "Prints hello!"
+    },
+    "add": {
+        "description": "Adds the two provided arguments"
+    }
+}
