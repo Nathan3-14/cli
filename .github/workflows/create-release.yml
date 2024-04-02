@@ -11,6 +11,10 @@ on:
   
 permissions: write-all
 
+defaults:
+  run:
+    working-directory: ./custom
+
 jobs:
   compress_src:
     runs-on: ubuntu-latest
@@ -23,6 +27,12 @@ jobs:
       run: |
         zip -r ./src.zip ./custom/src
     
+    - name: Get Changes
+      id: get_changes
+      run: |
+        sudo snap install yq
+        echo "changes=$(yq eval '.$( github.action.tag_name )' changes.yml)" >> $GITHUB_OUTPUT
+    
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -31,11 +41,10 @@ jobs:
       with:
         tag_name: ${{ github.action.tag_name }}
         release_name: Release ${{ github.run_number }}
-        body: |
-          Changes in release:
-          - a
-          - b
-      
+        body: ${{ github.action.get_changes.outputs.changes }}
+    
+          
+
     - name: Upload Asset
       uses: actions/upload-release-asset@v1
       env:
