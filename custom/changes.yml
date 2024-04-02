@@ -1,4 +1,4 @@
-v1-0-0:
+v.test.1:
   - CLI class that can be run via code
   - Command class that is used via the CLI class
   - Arument type checking for commands
