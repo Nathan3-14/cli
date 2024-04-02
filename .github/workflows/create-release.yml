@@ -25,7 +25,7 @@ jobs:
     
     - name: Compress Code
       run: |
-        zip -r ./src.zip ./custom/src
+        zip -r ./src.zip ./src
     
     - name: Get Changes
       id: get_changes
