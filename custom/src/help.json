@@ -2,6 +2,9 @@
     "hello": {
         "description": "Prints hello!"
     },
+    "subtract": {
+        "description": "Subtracts the two provided arguments"
+    },
     "add": {
         "description": "Adds the two provided arguments"
     }
