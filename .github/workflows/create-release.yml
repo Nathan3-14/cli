@@ -31,7 +31,7 @@ jobs:
       id: get_changes
       run: |
         sudo snap install yq
-        echo "changes=$(yq eval '.$( github.action.tag_name )' changes.yml)" >> $GITHUB_OUTPUT
+        echo "changes=$(yq eval '.$(github.action.tag_name)' changes.yml)" >> $GITHUB_OUTPUT
     
     - name: Create Release
       id: create_release
