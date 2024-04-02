@@ -5,7 +5,7 @@ from typing import List
 def error(message: str | List[str], error_start: str="Err:", error_path: str="logs/errors.log"):
     from .main import console
 
-    error_string = f"{datetime.now().strftime("%H:%M:%S")} - "
+    error_string = f"{datetime.now().strftime("%d/%m/%Y: %H:%M:%S")} - "
     os.makedirs(os.path.dirname(error_path), exist_ok=True)
 
     console.print(f"  [red]{error_start}[/red] ", end="")
