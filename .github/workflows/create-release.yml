@@ -39,7 +39,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.action.tag_name }}
+        tag_name: v.test.1
         release_name: Release ${{ github.run_number }}
         body: ${{ github.action.get_changes.outputs.changes }}
     
