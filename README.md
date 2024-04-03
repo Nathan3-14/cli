@@ -28,5 +28,8 @@ from rich.console import Console
 from cli import CLI, create_dict_of_commands
 
 console = Console()
-
+```
+You need to create functions with the following structure.
+```python
+def foo(args: List[Any]): #! Type hinting is not nessecary
 ```
