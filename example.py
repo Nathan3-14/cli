@@ -1,50 +1,32 @@
-from src import CLI, Command
+from src import CLI, Command, create_dict_of_commands
 from rich.console import Console
-from typing import List
+from typing import Any, List
+
+from src.funcs import create_dict_of_commands
 
 
-def add(args: List[float]):
+def add(args: List[Any]):
     return args[0] + args[1]
 
-def subtract(args: List[float]):
+def subtract(args: List[Any]):
     return args[0] - args[1]
+
+def hello(args: List[Any]):
+    count = args[1] if len(args) > 1 else 1
+    for _ in range(count):
+        print(args[0])
 
 
 console = Console()
 
 command_dict = {
     "add": add,
-    "subtract": subtract
+    "subtract": subtract,
+    "hello": hello
 }
 
-commands = {
-    "add": Command(
-        {
-            "name": "add",
-            "args": [
-                {"num_1": "float"},
-                {"num_2": "float"}
-            ]
-        },
-        add,
-        console
-    ),
-    "subtract": Command(
-        {
-            "name": "subtract",
-            "args": [
-                {"num_1": "float"},
-                {"num_2": "float"}
-            ]
-        },
-        subtract,
-        console
-    )
-}
-for command in "command list":
-    create command dict as above using commands.yml
+commands = create_dict_of_commands("./commands.yml", command_dict, console)
 
-#TODO maybe make a function that auto generates commands?
 
 cli = CLI(commands, console)
 
