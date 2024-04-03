@@ -14,17 +14,34 @@ console = Console()
 
 commands = {
     "add": Command(
-        {"num_1": (float, True), "num_2": (float, True)},
+        {
+            "name": "add",
+            "args": [
+                {"num_1": "float"},
+                {"num_2": "float"}
+            ]
+        },
         add,
         console
     ),
     "subtract": Command(
-        {"num_1": (float, True), "num_2": (float, True)},
+        {
+            "name": "subtract",
+            "args": [
+                {"num_1": "float"},
+                {"num_2": "float"}
+            ]
+        },
         subtract,
         console
     )
 }
 
-cli = CLI(commands, console)
+command_dict = {
+    "add": add,
+    "subtract": subtract
+}
+
+cli = CLI(commands, console, "./commands.yml")
 
 cli.run(input("Enter a command\n>> "), [item for item in input("Enter a list of two numbers, seperated by ', '\n>> ").split(", ")])
