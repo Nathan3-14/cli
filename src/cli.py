@@ -10,10 +10,9 @@ from .funcs import error
 print_json = lambda a: rprint_json(json.dumps(a))
 
 class CLI:
-    def __init__(self, commands: Dict[str, "Command"], command_list: List[Callable], console: Console, command_file: str) -> None:
+    def __init__(self, commands: Dict[str, "Command"], console: Console) -> None:
         self.console = console
         self.commands = commands
-        self.command_list = command_list
 
     def run(self, command_name: str, args: List[str]) -> None:
         self.commands[command_name].run(args)

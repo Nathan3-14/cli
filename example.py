@@ -12,6 +12,11 @@ def subtract(args: List[float]):
 
 console = Console()
 
+command_dict = {
+    "add": add,
+    "subtract": subtract
+}
+
 commands = {
     "add": Command(
         {
@@ -36,12 +41,11 @@ commands = {
         console
     )
 }
+for command in "command list":
+    create command dict as above using commands.yml
 
-command_dict = {
-    "add": add,
-    "subtract": subtract
-}
+#TODO maybe make a function that auto generates commands?
 
-cli = CLI(commands, console, "./commands.yml")
+cli = CLI(commands, console)
 
 cli.run(input("Enter a command\n>> "), [item for item in input("Enter a list of two numbers, seperated by ', '\n>> ").split(", ")])
