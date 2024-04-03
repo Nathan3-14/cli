@@ -1,6 +1,0 @@
-v1.0:
-  - CLI class that can be run via code
-  - Command class that is used via the CLI class
-  - Arument type checking for commands
-  - Rich text printed to console
-  - Proper error commands and error handling
