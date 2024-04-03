@@ -8,15 +8,16 @@ from .funcs import error
 print_json = lambda a: rprint_json(json.dumps(a))
 
 class CLI:
-    def __init__(self, commands: Dict[str, "Command"]) -> None:
-        self.console = Console()
+    def __init__(self, commands: Dict[str, "Command"], console: Console) -> None:
+        self.console = console
         self.commands = commands
 
     def run(self, command_name: str, args: List[str]) -> None:
         self.commands[command_name].run(args)
 
 class Command:
-    def __init__(self, desired_args: Dict[str, Tuple[Any, Any]], command_function: Callable) -> None: #! Type should be Tuple[Any, bool] but bool doesn't work
+    def __init__(self, desired_args: Dict[str, Tuple[Any, Any]], command_function: Callable, console: Console) -> None: #! Type should be Tuple[Any, bool] but bool doesn't work
+        self.console = console
         self.desired_args = desired_args
         self.desired_args_keys = list(self.desired_args)
         self.command = command_function
@@ -32,7 +33,7 @@ class Command:
                 f"Incorrect argument supplied",
                 f"Expected {self.expected_arg_string}",
                 f"but recieved {self.recieved_args_string}"
-            ])
+            ], self.console)
             quit()
         rprint(self.command(input_args))
         

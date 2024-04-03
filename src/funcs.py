@@ -1,10 +1,9 @@
 from datetime import datetime
 import os
 from typing import List
+from rich.console import Console
 
-def error(message: str | List[str], error_start: str="Err:", error_path: str="logs/errors.log"):
-    from .main import console
-
+def error(message: str | List[str], console: Console, error_start: str="Err:", error_path: str="logs/errors.log"):
     error_string = f"{datetime.now().strftime("%d/%m/%Y: %H:%M:%S")} - "
     os.makedirs(os.path.dirname(error_path), exist_ok=True)
 
