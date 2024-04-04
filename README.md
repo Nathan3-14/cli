@@ -29,7 +29,24 @@ from cli import CLI, create_dict_of_commands
 
 console = Console()
 ```
-You need to create functions with the following structure.
+You need to create functions with the following structure, as well as a dictionary containing them all
 ```python
 def foo(args: List[Any]): #! Type hinting is not nessecary
+    # do stuff
+    # return values are not nessecary but can be used
+def bar(args: List[Any]):
+    # do stuff
+command_dict = {
+    "foo": foo,
+    "bar": bar
+} #! note the lack of brackets on functions
+```
+With the dictionary created you need to run the `create_dict_of_commands` function with the path to your yaml file
+```python
+commands = create_dict_of_commands("./path-to-file.yml", command_dict, console)
+```
+Then you need to create the cli object and run commands from it.
+```python
+cli = CLI(commands, console)
+cli.run("<command>", ["<args>", "<args>"])
 ```
