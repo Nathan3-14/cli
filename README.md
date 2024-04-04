@@ -13,17 +13,18 @@ commands:
       [...]
   [...]
 ```
-In order to use the code, download either src or dist/cli and copy it into the root of your project.
+In order to use the code, download either src (for latest unstable) or dist/cli (for latest stable) and copy it into the root of your project.  
+Additionally you can download dist/cli.zip and extract it into the route of your project.
 ```
 |--> main.py
 |--> [...]
 |--> cli
 ```
 After installing, run `pip install -r cli/requirements.txt`  
-In you file you need a rich console created ([more info](https://rich.readthedocs.io/en/stable/reference/console.html))  
-You will need to import `CLI` and `create_dict_of_commands`
+In you file you need a rich console created ([more info](https://rich.readthedocs.io/en/stable/reference/console.html)) and you will need to import `CLI` and `create_dict_of_commands` at the top of your file.
 ```python
 #* main.py *#
+
 from rich.console import Console
 from cli import CLI, create_dict_of_commands
 
@@ -31,6 +32,8 @@ console = Console()
 ```
 You need to create functions with the following structure, as well as a dictionary containing them all
 ```python
+#* ... *#
+
 def foo(args: List[Any]): #! Type hinting is not nessecary
     # do stuff
     # return values are not nessecary but can be used
@@ -43,10 +46,14 @@ command_dict = {
 ```
 With the dictionary created you need to run the `create_dict_of_commands` function with the path to your yaml file
 ```python
+#* ... *#
+
 commands = create_dict_of_commands("./path-to-file.yml", command_dict, console)
 ```
 Then you need to create the cli object and run commands from it.
 ```python
+#* ... *#
+
 cli = CLI(commands, console)
 cli.run("<command>", ["<args>", "<args>"])
 ```
