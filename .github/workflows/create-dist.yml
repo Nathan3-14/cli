@@ -17,12 +17,12 @@ jobs:
       
       - name: Copy
         run: |
-          cp src dist/src
+          cp src dist/src -r
           cp requirements.txt dist/src/
       
       - name: Commit Changes
         run: |
-          git add dist/src/**
+          git add dist/src
           git commit -m "Distributed Code"
           git push origin
         
