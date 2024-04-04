@@ -1,4 +1,6 @@
 # CLI
+## Contents
+- [Usage](#usage)
 ## Usage
 Command yaml file structure:
 ```yaml
