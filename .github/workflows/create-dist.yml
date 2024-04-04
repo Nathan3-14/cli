@@ -17,6 +17,10 @@ jobs:
       
       - name: Copy
         run: |
+          if [ ! -d dist ]; then
+            mkdir dist;
+          fi
+      
           cp src dist/src -r
           cp requirements.txt dist/src/
       
