@@ -28,5 +28,9 @@ jobs:
         run: |
           git add dist/src
           git commit -m "Distributed Code"
-          git push origin
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
         
