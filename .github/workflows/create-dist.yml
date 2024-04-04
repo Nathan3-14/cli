@@ -1,0 +1,27 @@
+name: Create Distribution
+on:
+  push:
+    tags:
+      - v*
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: Setup Git
+        run: |
+          git config user.name "Distribution Bot"
+          git config user.email "cli@noreply.github.com"
+      
+      - name: Copy
+        run: |
+          cp src dist/src
+      
+      - name: Commit Changes
+        run: |
+          git add dist/src/**
+          git commit -m "Distributed Code"
+          git push origin
+        
