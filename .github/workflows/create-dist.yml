@@ -18,6 +18,7 @@ jobs:
       - name: Copy
         run: |
           cp src dist/src
+          cp requirements.txt dist/src/
       
       - name: Commit Changes
         run: |
